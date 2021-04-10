@@ -1,0 +1,41 @@
+<header>
+    <!--Navbar-->
+    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark cyan" [containerInside]="false">
+
+        <!-- Navbar brand -->
+        <mdb-navbar-brand><a class="navbar-brand" href="#">Gagan</a></mdb-navbar-brand>
+
+        <!-- Collapsible contents -->
+        <links>
+
+            <!-- Links -->
+            <ul class="navbar-nav ml-auto nav-flex-icons">
+                <li class="nav-item active">
+                    <a class="nav-link waves-light" type="button" mdbWavesEffect>
+                        <mdb-icon fas icon="home"></mdb-icon>Home<span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-light" type="button" mdbWavesEffect>
+                        <mdb-icon fas icon="address-card"></mdb-icon>About Us<span class="caret"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-light" type="button" mdbWavesEffect>
+                        <mdb-icon fas icon="envelope-open"></mdb-icon>Contact Us<span class="caret"></span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown" dropdown>
+                    <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+                        <mdb-icon fas icon="user"></mdb-icon> Profile<span class="caret"></span>
+                    </a>
+                    <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+                        <a class="dropdown-item waves-light" mdbWavesEffect href="#">My account</a>
+                        <a class="dropdown-item waves-light" mdbWavesEffect href="#">Log out</a>
+                    </div>
+                </li>
+            </ul>
+        </links>
+
+    </mdb-navbar>
+</header>
