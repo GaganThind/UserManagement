@@ -6,12 +6,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login/login.component';
 import { NavigationComponent } from './navigation/navigation/navigation.component';
+import { AboutUsComponent } from './aboutus/about-us/about-us.component';
+import { ContactUsComponent } from './contactus/contact-us/contact-us.component';
+import { HomeComponent } from './home/home/home.component';
+import { SignUpComponent } from './signup/sign-up/sign-up.component';
+import { AccountComponent } from './account/account/account.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    NavigationComponent
+    NavigationComponent,
+    AboutUsComponent,
+    ContactUsComponent,
+    HomeComponent,
+    SignUpComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
