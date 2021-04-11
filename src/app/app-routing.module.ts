@@ -6,6 +6,7 @@ import { ContactUsComponent } from './contactus/contact-us/contact-us.component'
 import { HomeComponent } from './home/home/home.component';
 import { LoginComponent } from './login/login/login.component';
 import { SignUpComponent } from './signup/sign-up/sign-up.component';
+import { UnknownPathComponent } from './unknownpath/unknown-path/unknown-path.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'signup', component: SignUpComponent },
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'contactus', component: ContactUsComponent },
-  { path: 'account', component: AccountComponent }
+  { path: 'account', component: AccountComponent },
+  { path: '**', component: UnknownPathComponent },
 ];
 
 @NgModule({

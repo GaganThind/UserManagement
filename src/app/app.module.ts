@@ -11,6 +11,7 @@ import { ContactUsComponent } from './contactus/contact-us/contact-us.component'
 import { HomeComponent } from './home/home/home.component';
 import { SignUpComponent } from './signup/sign-up/sign-up.component';
 import { AccountComponent } from './account/account/account.component';
+import { UnknownPathComponent } from './unknownpath/unknown-path/unknown-path.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AccountComponent } from './account/account/account.component';
     ContactUsComponent,
     HomeComponent,
     SignUpComponent,
-    AccountComponent
+    AccountComponent,
+    UnknownPathComponent
   ],
   imports: [
     BrowserModule,
