@@ -1,1 +1,29 @@
-<p>hotel works!</p>
+<section>
+
+    <!-- Card -->
+    <mdb-card>
+
+        <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+
+            <!-- Card img -->
+            <mdb-card-img src="{{ hotel.image }}" alt="{{ hotel.name }}" title="{{ hotel.name }}"></mdb-card-img>
+            <a>
+                <div class="mask"></div>
+            </a>
+        </div>
+       
+        <!--Card content-->
+        <mdb-card-body>
+
+            <mdb-card-title>
+                <h4>{{ hotel.name }}</h4>
+            </mdb-card-title>
+
+            <!--Text-->
+            <mdb-card-text> {{ hotel.address }}
+            </mdb-card-text>
+
+        </mdb-card-body>
+    </mdb-card>
+    <br>
+</section>

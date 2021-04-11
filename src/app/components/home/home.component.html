@@ -1,3 +1,5 @@
 <section>
-    <app-hotel></app-hotel>
+    <div class="container container-hotel">
+        <app-hotel *ngFor="let hotel of hotels" [hotel]="hotel" ></app-hotel>
+    </div>
 </section>
