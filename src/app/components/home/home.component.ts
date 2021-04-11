@@ -10,6 +10,11 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.getHotelList();
+  }
+
+  private getHotelList() {
+    alert();
   }
 
 }
