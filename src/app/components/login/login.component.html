@@ -14,8 +14,8 @@
                                 </span>
                             </div>
                             <input id="email" type="email" name="email" placeholder="Email Address"
-                                [(ngModel)]="user.username" class="form-control bg-white border-left-0 border-md"
-                                #email=ngModel required>
+                                class="form-control bg-white border-left-0 border-md"
+                                [(ngModel)]="user.username" #email=ngModel required>
                         </div>
                         <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
                             <div *ngIf="email.errors.required">
@@ -31,8 +31,8 @@
                                 </span>
                             </div>
                             <input id="password" type="password" name="password" placeholder="Password"
-                                [(ngModel)]="user.password" class="form-control bg-white border-left-0 border-md"
-                                #password=ngModel required>
+                                class="form-control bg-white border-left-0 border-md"
+                                [(ngModel)]="user.password" #password=ngModel required>
                         </div>
                         <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
                             <div *ngIf="password.errors.required">

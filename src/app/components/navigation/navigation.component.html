@@ -28,7 +28,13 @@
                         <mdb-icon fas icon="envelope-open"></mdb-icon>Contact Us<span class="caret"></span>
                     </a>
                 </li>
-                <li class="nav-item dropdown" dropdown>
+                <li class="nav-item" *ngIf="!authSvc.isLoggedIn()">
+                    <a class="nav-link waves-light" type="button" routerLink="login"
+                        routerLinkActive="active current" mdbWavesEffect>
+                        <mdb-icon fas icon="sign-in-alt"></mdb-icon>Login<span class="caret"></span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown" dropdown *ngIf="authSvc.isLoggedIn()">
                     <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
                         <mdb-icon fas icon="user"></mdb-icon> Profile<span class="caret"></span>
                     </a>
@@ -37,7 +43,7 @@
                         <a class="dropdown-item nav-link waves-light" mdbWavesEffect routerLink="account">
                             <mdb-icon fas icon="user-circle"></mdb-icon> My Account<span class="caret"></span>
                         </a>
-                        <a class="dropdown-item nav-link waves-light" mdbWavesEffect href="#">
+                        <a class="dropdown-item nav-link waves-light" mdbWavesEffect (click)="logout()">
                             <mdb-icon fas icon="sign-out-alt"></mdb-icon> Log out<span class="caret"></span>
                         </a>
                     </div>
