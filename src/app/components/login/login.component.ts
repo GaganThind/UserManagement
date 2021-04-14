@@ -20,12 +20,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    const payload = {
-      "username": "test1@e.com",
-      "password": "Tw"
-    }
-    
-   this.authSvc.authenticate(payload).subscribe(
+   this.authSvc.authenticate(this.user).subscribe(
         data => {
           this.authSvc.setLoggedInDetails(data);          
           this.router.navigateByUrl('/');
