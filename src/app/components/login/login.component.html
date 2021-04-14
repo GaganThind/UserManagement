@@ -6,45 +6,58 @@
                     <div class="mx-auto">
                         <h3 class="login-heading mb-4">Welcome back!</h3>
 
-                            <!-- Email Address -->
-                            <div class="input-group col-lg-15 mb-4">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text bg-white px-3 border-md border-right-0">
-                                        <i class="fa fa-envelope text-muted"></i>
-                                    </span>
-                                </div>
-                                <input id="email" type="email" name="email" placeholder="Email Address" [(ngModel)]="email"
-                                    class="form-control bg-white border-left-0 border-md" required >
+                        <!-- Email Address -->
+                        <div class="input-group col-lg-15 mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-white px-3 border-md border-right-0">
+                                    <i class="fa fa-envelope text-muted"></i>
+                                </span>
                             </div>
+                            <input id="email" type="email" name="email" placeholder="Email Address"
+                                [(ngModel)]="user.username" class="form-control bg-white border-left-0 border-md"
+                                #email=ngModel required>
+                        </div>
+                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+                            <div *ngIf="email.errors.required">
+                                Email is required.
+                            </div>
+                        </div>
 
-                            <!-- Password -->
-                            <div class="input-group col-lg-15 mb-4">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text bg-white px-3 border-md border-right-0">
-                                        <i class="fa fa-lock text-muted"></i>
-                                    </span>
-                                </div>
-                                <input id="password" type="password" name="password" placeholder="Password" [(ngModel)]="password"
-                                    class="form-control bg-white border-left-0 border-md" required >
+                        <!-- Password -->
+                        <div class="input-group col-lg-15 mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-white px-3 border-md border-right-0">
+                                    <i class="fa fa-lock text-muted"></i>
+                                </span>
                             </div>
+                            <input id="password" type="password" name="password" placeholder="Password"
+                                [(ngModel)]="user.password" class="form-control bg-white border-left-0 border-md"
+                                #password=ngModel required>
+                        </div>
+                        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+                            <div *ngIf="password.errors.required">
+                                Password is required.
+                            </div>
+                        </div>
 
-                            <!-- Remenber Me -->
-                            <div class="custom-control custom-checkbox mb-3">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1" [(ngModel)]="rememberMe">
-                                <label class="custom-control-label" for="customCheck1">Remember password</label>
-                            </div>
+                        <!-- Remenber Me -->
+                        <div class="custom-control custom-checkbox mb-3">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1"
+                                [(ngModel)]="rememberMe">
+                            <label class="custom-control-label" for="customCheck1">Remember password</label>
+                        </div>
 
-                            <!-- Submit Button -->
-                            <div class="form-group col-lg-15 mx-auto mb-0">
-                                <button
-                                    class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
-                                    type="submit" (click)="login()">
-                                    Sign in
-                                </button>
-                            </div>
-                            <div class="text-center">
-                                <a class="small" href="#">Forgot password?</a>
-                            </div>
+                        <!-- Submit Button -->
+                        <div class="form-group col-lg-15 mx-auto mb-0">
+                            <button
+                                class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
+                                type="submit" (click)="login()">
+                                Sign in
+                            </button>
+                        </div>
+                        <div class="text-center">
+                            <a class="small" href="#">Forgot password?</a>
+                        </div>
                     </div>
                 </div>
             </div>
