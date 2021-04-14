@@ -1,1 +1,47 @@
-<p>sign-up works!</p>
+<div class="container container-main">
+    <form class="text-center border border-light p-5">
+    
+        <p class="h4 mb-4">Sign up</p>
+    
+        <div class="form-row mb-4">
+            <div class="col">
+                <input type="text" id="firstName" class="form-control" placeholder="First name">
+            </div>
+            <div class="col">
+                <input type="text" id="lastName" class="form-control" placeholder="Last name">
+            </div>
+        </div>
+    
+        <input type="email" id="email" class="form-control mb-4" placeholder="E-mail">
+    
+        <input type="password" id="password" class="form-control" placeholder="Password"
+            aria-describedby="passwordHelpBlock">
+        <small id="passwordHelpBlock" class="form-text text-muted mb-4">
+            At least 8 characters and 1 digit
+        </small>
+
+        <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password"
+            aria-describedby="confirmPasswordHelpBlock">
+        <small id="confirmPasswordHelpBlock" class="form-text text-muted mb-4">
+            Should match the password
+        </small>
+        
+        <input type="text" id="phone" class="form-control" placeholder="Phone number"
+            aria-describedby="phonehelpBlock">
+        <small id="phonehelpBlock" class="form-text text-muted mb-4">
+            Optional - for two-step authentication
+        </small>
+    
+        <!-- Sign up button -->
+        <button mdbBtn color="info" block="true" class="my-4" type="submit">Sign in</button>
+    
+        <hr>
+    
+        <!-- Terms of service -->
+        <p>By clicking
+            <em>Sign up</em> you agree to our
+            <a href="" target="_blank">terms of service</a>
+        </p>
+    
+    </form>
+</div>
