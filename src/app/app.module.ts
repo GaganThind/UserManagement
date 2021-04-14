@@ -8,7 +8,7 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthInterceptor } from './interceptors/auth-interceptor';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './components/guard/auth.guard';
 
 @NgModule({
   declarations: [
