@@ -21,7 +21,4 @@ export class AuthInterceptor implements HttpInterceptor {
     }
     
 }
-function tap(arg0: (event: any) => void, arg1: (error: any) => void): import("rxjs").OperatorFunction<HttpEvent<any>, HttpEvent<any>> {
-    throw new Error("Function not implemented.");
-}
 
