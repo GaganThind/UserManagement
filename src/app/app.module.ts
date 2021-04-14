@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +15,8 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { AccountComponent } from './components/account/account.component';
 import { UnknownPathComponent } from './components/unknownpath/unknown-path/unknown-path.component';
 import { HotelComponent } from './components/hotel/hotel.component';
+import { AuthenticationService } from './services/authentication.service';
+import { AuthInterceptor } from './interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,12 @@ import { HotelComponent } from './components/hotel/hotel.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AuthenticationService,
+    {
+      provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true 
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
