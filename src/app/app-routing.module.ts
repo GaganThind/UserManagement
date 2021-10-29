@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'contactus', component: ContactUsComponent },
   { path: 'account', component: AccountComponent, canActivate: [ AuthGuard ] },
-  { path: 'password', component: ResetPasswordComponent },
+  { path: 'password/reset', component: ResetPasswordComponent },
   { path: '**', component: UnknownPathComponent },
 ];
 
