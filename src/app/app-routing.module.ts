@@ -10,6 +10,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { UnknownPathComponent } from './components/unknown-path/unknown-path.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'contactus', component: ContactUsComponent },
   { path: 'account', component: AccountComponent, canActivate: [ AuthGuard ] },
+  { path: 'password', component: ResetPasswordComponent },
   { path: '**', component: UnknownPathComponent },
 ];
 
@@ -36,5 +38,6 @@ export const routingComponents = [
   SignUpComponent,
   AccountComponent,
   UnknownPathComponent,
-  HotelComponent
+  HotelComponent,
+  ResetPasswordComponent
 ]
