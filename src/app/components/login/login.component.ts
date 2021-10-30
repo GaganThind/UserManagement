@@ -13,8 +13,9 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 export class LoginComponent implements OnInit {
 
   user = new User();
-  rememberMe: boolean = false;
+  rememberMe = false;
   loginForm: FormGroup;
+  submitted = false;
 
   constructor(private http: HttpClient, private authSvc: AuthenticationService, private router: Router) { }
 
@@ -26,19 +27,22 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-   this.authSvc.authenticate(this.user).subscribe(
-        data => {
-          this.authSvc.setLoggedInDetails(data);          
-          this.router.navigateByUrl('/');
-        },
-        error => {
-          this.authSvc.logout();
-        }
-    );
-  }
+    this.submitted = true;
 
-  forgotPassword() {
-    this.router.navigateByUrl('/password/reset');
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    this.authSvc.authenticate(this.user)
+                .subscribe(
+                    data => {
+                      this.authSvc.setLoggedInDetails(data);          
+                      this.router.navigateByUrl('/');
+                    },
+                    error => {
+                      this.authSvc.logout();
+                    }
+                );
   }
 
 }
