@@ -33,16 +33,16 @@ export class ErrorInterceptor implements HttpInterceptor {
    * @returns 
    */
   getExceptionMessage(error: any): string {
-    if (undefined == error || undefined == error.error) {
+    if (undefined == error) {
       return "No Exception found. Contact Admin";
     }
 
-    if (typeof error.error === 'string') {
+    if (undefined != error.error && typeof error.error === 'string') {
       let exceptionDetails = new ExceptionDetails();
       Object.assign(exceptionDetails, JSON.parse(error.error));
       return exceptionDetails.exceptionMessage;
     }
 
-    return error.error.message || error.statusText;
+    return error.status;
   }
 }
