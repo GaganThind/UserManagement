@@ -18,8 +18,9 @@ export class AuthenticationService {
   isLoggedIn(): boolean {
     const token = localStorage.getItem('token');
     const expiresIn = localStorage.getItem('expiresIn');
-
-    return token && expiresIn && (new Date().getTime() <= Number(expiresIn));
+    
+    const isLoggedIn = token && expiresIn && (new Date().getTime() <= Number(expiresIn));
+    return isLoggedIn;
   }
 
   setLoggedInDetails(data: string): void {
