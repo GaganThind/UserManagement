@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
@@ -17,14 +17,18 @@ export class LoginComponent implements OnInit {
   submitted = false;
   isLoading = false;
   errorStatus = '';
+  returnUrl = '';
 
-  constructor(private authSvc: AuthenticationService, private router: Router) { }
+  constructor(private authSvc: AuthenticationService, private router: Router, private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       email: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
     });
+
+    // Return url from route parameters or default to '/'
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   login() {
@@ -43,7 +47,7 @@ export class LoginComponent implements OnInit {
                 .subscribe(
                     data => {
                       this.authSvc.setLoggedInDetails(data);         
-                      this.router.navigateByUrl('/');
+                      this.router.navigateByUrl(this.returnUrl);
                     },
                     error => {
                       this.authSvc.logout();
