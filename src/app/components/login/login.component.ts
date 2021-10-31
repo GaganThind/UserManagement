@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,8 +15,9 @@ export class LoginComponent implements OnInit {
   rememberMe = false;
   loginForm: FormGroup;
   submitted = false;
+  isLoading = false;
 
-  constructor(private http: HttpClient, private authSvc: AuthenticationService, private router: Router) { }
+  constructor(private authSvc: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -33,6 +33,8 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    this.isLoading = true;
+
     this.authSvc.authenticate(this.user)
                 .subscribe(
                     data => {
@@ -41,6 +43,7 @@ export class LoginComponent implements OnInit {
                     },
                     error => {
                       this.authSvc.logout();
+                      this.isLoading = false;
                     }
                 );
   }
