@@ -29,16 +29,19 @@ export class LoginComponent implements OnInit {
   login() {
     this.submitted = true;
 
-    if (this.loginForm.invalid) {
+    // If username or password is incorrect, then stop execution
+    if (undefined === this.user.username || undefined === this.user.password) {
       return;
     }
 
+    // Variable used to disable buttons
     this.isLoading = true;
 
+    // Authentication
     this.authSvc.authenticate(this.user)
                 .subscribe(
                     data => {
-                      this.authSvc.setLoggedInDetails(data);          
+                      this.authSvc.setLoggedInDetails(data);         
                       this.router.navigateByUrl('/');
                     },
                     error => {

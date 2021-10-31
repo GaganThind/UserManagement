@@ -53,7 +53,7 @@
                                 class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
                                 [disabled] = "isLoading"
                                 type="submit" (click)="login()">
-                                <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
+                                <span *ngIf="isLoading"><i class="fas fa-spinner"></i></span>
                                 Sign in
                             </button>
                         </div>
