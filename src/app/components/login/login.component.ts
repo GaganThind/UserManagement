@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
   isLoading = false;
-  errorStatus = '';
+  errorMessage = '';
   returnUrl = '';
 
   constructor(private authSvc: AuthenticationService, private router: Router, private route: ActivatedRoute,) { }
@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
 
     // Variable used to disable buttons
     this.isLoading = true;
+    this.errorMessage = '';
 
     // Authentication
     this.authSvc.authenticate(this.userLogin)
@@ -51,7 +52,7 @@ export class LoginComponent implements OnInit {
                     },
                     error => {
                       this.authSvc.logout();
-                      this.errorStatus = error.status;
+                      this.errorMessage = error;
                       this.isLoading = false;
                     }
                 );
