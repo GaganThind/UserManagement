@@ -8,7 +8,7 @@
 
                         <!-- Error Messages -->
                         <div *ngIf="'403' == errorStatus" class="alert alert-danger">
-                            Email or Password is incorrect.
+                            Email or Password is incorrect
                         </div>
 
                         <!-- Email Address -->
@@ -24,7 +24,7 @@
                         </div>
                         <div *ngIf="email.invalid && (email.dirty || email.touched || submitted)" class="alert alert-danger">
                             <div *ngIf="email.errors.required">
-                                Email is required.
+                                Email is required
                             </div>
                         </div>
 
@@ -41,7 +41,7 @@
                         </div>
                         <div *ngIf="password.invalid && (password.dirty || password.touched || submitted)" class="alert alert-danger">
                             <div *ngIf="password.errors.required">
-                                Password is required.
+                                Password is required
                             </div>
                         </div>
 

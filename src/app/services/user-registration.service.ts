@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -12,6 +12,6 @@ export class UserRegistrationService {
   constructor(private http: HttpClient) { }
 
   registerUser(user: User): Observable<string> {
-    return this.http.post<string>(`${environment.baseRestURL}/v1/users/register`, user);
+    return this.http.post(`${environment.baseRestURL}/v1/users/register`, user, { responseType: 'text' });
   }
 }

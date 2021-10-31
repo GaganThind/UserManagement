@@ -10,6 +10,7 @@ import { AuthenticationService } from './services/authentication.service';
 import { AuthInterceptor } from './interceptors/auth-interceptor';
 import { AuthGuard } from './guard/auth.guard';
 import { UserRegistrationService } from './services/user-registration.service';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -25,9 +26,8 @@ import { UserRegistrationService } from './services/user-registration.service';
   ],
   providers: [
     AuthenticationService,
-    {
-      provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true 
-    },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     AuthGuard,
     UserRegistrationService
   ],
