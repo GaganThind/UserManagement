@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserRegistrationService } from 'src/app/services/user-registration.service';
 
@@ -16,9 +15,9 @@ export class SignUpComponent implements OnInit {
   submitted = false;
   isLoading = false;
   errorMessage = '';
-  accountCreated = false;
+  message = '';
 
-  constructor(private userRegistrationSvc: UserRegistrationService, private router: Router) { }
+  constructor(private userRegistrationSvc: UserRegistrationService) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -28,8 +27,8 @@ export class SignUpComponent implements OnInit {
       password: new FormControl('', Validators.required),
       matchingPassword: new FormControl('', Validators.required),
       phoneNumber: new FormControl('', Validators.required),
-      dob: new FormControl('', Validators.required),
-      gender: new FormControl('', Validators.required)
+      dob: new FormControl(''),
+      gender: new FormControl('')
     });
   }
 
@@ -43,18 +42,17 @@ export class SignUpComponent implements OnInit {
 
     // Variable used to disable buttons
     this.isLoading = true;
-
-    // Add Role
-    this.user.addRole("USER");
+    this.message = '';
+    this.errorMessage = '';
 
     this.userRegistrationSvc.registerUser(this.user)
                             .subscribe(
                               data => {
-                                this.accountCreated = true;
+                                this.message = data;
+                                this.isLoading = false;
                               },
                               error => {
-                                this.accountCreated = false;
-                                this.errorMessage = error.error?.exceptionMessage;
+                                this.errorMessage = error;
                                 this.isLoading = false;
                               }
                             );
