@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { User } from 'src/app/models/user';
+import { UserRegistrationService } from 'src/app/services/user-registration.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -7,9 +11,58 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor() { }
+  user = new User();
+  loginForm: FormGroup;
+  submitted = false;
+  isLoading = false;
+  errorMessage = '';
+  accountCreated = false;
+
+  constructor(private userRegistrationSvc: UserRegistrationService, private router: Router) { }
 
   ngOnInit(): void {
+    this.loginForm = new FormGroup({
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+      matchingPassword: new FormControl('', Validators.required),
+      phoneNumber: new FormControl('', Validators.required),
+      dob: new FormControl('', Validators.required),
+      gender: new FormControl('', Validators.required)
+    });
   }
 
+  signUp() {
+    this.submitted = true;
+
+    // If required fields are not present, then return. The UI will automatically display errors.
+    if (this.areRequiredFieldsNotSet()) {
+      return;
+    }
+
+    // Variable used to disable buttons
+    this.isLoading = true;
+
+    // Add Role
+    this.user.addRole("USER");
+
+    this.userRegistrationSvc.registerUser(this.user)
+                            .subscribe(
+                              data => {
+                                this.accountCreated = true;
+                              },
+                              error => {
+                                this.accountCreated = false;
+                                this.errorMessage = error.error?.exceptionMessage;
+                                this.isLoading = false;
+                              }
+                            );
+  }
+
+  private areRequiredFieldsNotSet() {
+    return undefined === this.user.firstName || undefined === this.user.lastName
+      || undefined === this.user.email || undefined === this.user.password
+      || undefined === this.user.matchingPassword;
+  }
 }

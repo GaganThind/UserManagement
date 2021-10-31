@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from 'src/app/models/user';
+import { Login } from 'src/app/models/login';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class LoginComponent implements OnInit {
 
-  user = new User();
+  userLogin = new Login();
   rememberMe = false;
   loginForm: FormGroup;
   submitted = false;
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
 
     // If username or password is incorrect, then stop execution
-    if (undefined === this.user.username || undefined === this.user.password) {
+    if (undefined === this.userLogin.username || undefined === this.userLogin.password) {
       return;
     }
 
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
 
     // Authentication
-    this.authSvc.authenticate(this.user)
+    this.authSvc.authenticate(this.userLogin)
                 .subscribe(
                     data => {
                       this.authSvc.setLoggedInDetails(data);         

@@ -2,44 +2,112 @@
     <form class="text-center border border-light p-5">
     
         <p class="h4 mb-4">Sign up</p>
-    
+        
+        <!-- First name & Last name -->
         <div class="form-row mb-4">
             <div class="col">
-                <input type="text" id="firstName" class="form-control" placeholder="First name">
+                <input type="text" id="firstName" name="firstName" title="First Name" class="form-control" placeholder="First name"
+                [(ngModel)]="user.firstName" #firstName=ngModel required>
             </div>
+            <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched || submitted)" class="alert alert-danger">
+                <div *ngIf="firstName.errors.required">
+                    First Name is required.
+                </div>
+            </div>
+
             <div class="col">
-                <input type="text" id="lastName" class="form-control" placeholder="Last name">
+                <input type="text" id="lastName" name="lastName" title="Last Name" class="form-control" placeholder="Last name"
+                [(ngModel)]="user.lastName" #lastName=ngModel required>
+            </div>
+            <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched || submitted)" class="alert alert-danger">
+                <div *ngIf="lastName.errors.required">
+                    Last Name is required.
+                </div>
             </div>
         </div>
     
-        <input type="email" id="email" class="form-control mb-4" placeholder="E-mail">
+        <!-- Email -->
+        <input type="email" id="email" name="email" title="Email" class="form-control mb-4" placeholder="E-mail"
+        [(ngModel)]="user.email" #email=ngModel required>
+        <div *ngIf="email.invalid && (email.dirty || email.touched || submitted)" class="alert alert-danger">
+            <div *ngIf="email.errors.required">
+                Email is required.
+            </div>
+        </div>
     
-        <input type="password" id="password" class="form-control" placeholder="Password"
-            aria-describedby="passwordHelpBlock">
+        <!-- Password -->
+        <input type="password" id="password" name="password" title="Password" class="form-control" placeholder="Password"
+            aria-describedby="passwordHelpBlock" [(ngModel)]="user.password" #password=ngModel required>
         <small id="passwordHelpBlock" class="form-text text-muted mb-4">
             At least 8 characters and 1 digit
         </small>
+        <div *ngIf="password.invalid && (password.dirty || password.touched || submitted)" class="alert alert-danger">
+            <div *ngIf="password.errors.required">
+                Password is required.
+            </div>
+        </div>
 
-        <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password"
-            aria-describedby="confirmPasswordHelpBlock">
+        <!-- Confirm Password -->
+        <input type="password" id="confirmPassword" name="confirmPassword" title ="Confirm Password" class="form-control" placeholder="Confirm Password"
+            aria-describedby="confirmPasswordHelpBlock" [(ngModel)]="user.matchingPassword" #confirmPassword=ngModel required>
         <small id="confirmPasswordHelpBlock" class="form-text text-muted mb-4">
             Should match the password
         </small>
+        <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched || submitted)" class="alert alert-danger">
+            <div *ngIf="confirmPassword.errors.required">
+                Confirm Password is required.
+            </div>
+        </div>
+        <div *ngIf="password.value != confirmPassword.value && (confirmPassword.dirty || confirmPassword.touched || submitted)" class="alert alert-danger">
+            Password & Confirm Password not matching.
+        </div>
         
-        <input type="text" id="phone" class="form-control" placeholder="Phone number"
-            aria-describedby="phonehelpBlock">
+        <!-- Phone -->
+        <input type="text" id="phoneNumber" name="phoneNumber" title="Phone number" class="form-control" placeholder="Phone number"
+            aria-describedby="phonehelpBlock" [(ngModel)]="user.phoneNumber" #phoneNumber=ngModel>
         <small id="phonehelpBlock" class="form-text text-muted mb-4">
             Optional - for two-step authentication
         </small>
+
+        <!-- Date of Birth -->
+        <div>
+            <input type="date" id="dob" name="dob" title="Date of Birth" class="form-control" placeholder="Date of Birth"
+            [(ngModel)]="user.dob" #dob=ngModel>
+        </div>
+        <br>
+
+        <!-- Gender -->
+        <div>
+            <select id="gender" name="gender" title="gender" class="form-control" [(ngModel)]="user.gender" #gender=ngModel>
+                <option id="m" value="M">Male</option>
+                <option id="f" value="F">Female</option>
+                <option id="o" value="O">Others</option>
+            </select>
+        </div>
+        <br>
     
         <!-- Sign up button -->
-        <button mdbBtn color="info" block="true" class="my-4" type="submit">Sign in</button>
+        <button
+            class="btn btn-lg btn-primary btn-block btn-signUp text-uppercase font-weight-bold mb-2"
+            [disabled] = "isLoading"
+            type="submit" (click)="signUp()">
+            <span *ngIf="isLoading"><i class="fas fa-spinner"></i></span>
+            Sign Up
+        </button>
+
+        <!-- Messages -->
+        <div *ngIf="undefined != errorMessage && '' != errorMessage" class="alert alert-danger">
+            {{errorMessage}}
+        </div>
+        <div *ngIf="true == accountCreated" class="alert alert-success">
+            Account created successfully. Check your email for activation link.
+        </div>
     
         <hr>
     
         <!-- Terms of service -->
         <p>By clicking
-            <em>Sign up</em> you agree to our
+            <em>Sign up</em>, you agree to our
             <a href="" target="_blank">terms of service</a>
         </p>
     

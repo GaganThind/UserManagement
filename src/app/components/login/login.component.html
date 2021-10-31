@@ -6,6 +6,7 @@
                     <div class="mx-auto">
                         <h3 class="login-heading mb-4">Welcome back!</h3>
 
+                        <!-- Error Messages -->
                         <div *ngIf="'403' == errorStatus" class="alert alert-danger">
                             Email or Password is incorrect.
                         </div>
@@ -19,7 +20,7 @@
                             </div>
                             <input id="email" type="email" name="email" placeholder="Email Address"
                                 class="form-control bg-white border-left-0 border-md"
-                                [(ngModel)]="user.username" #email=ngModel required>
+                                [(ngModel)]="userLogin.username" #email=ngModel required>
                         </div>
                         <div *ngIf="email.invalid && (email.dirty || email.touched || submitted)" class="alert alert-danger">
                             <div *ngIf="email.errors.required">
@@ -36,7 +37,7 @@
                             </div>
                             <input id="password" type="password" name="password" placeholder="Password"
                                 class="form-control bg-white border-left-0 border-md"
-                                [(ngModel)]="user.password" #password=ngModel required>
+                                [(ngModel)]="userLogin.password" #password=ngModel required>
                         </div>
                         <div *ngIf="password.invalid && (password.dirty || password.touched || submitted)" class="alert alert-danger">
                             <div *ngIf="password.errors.required">
@@ -61,8 +62,17 @@
                                 Sign in
                             </button>
                         </div>
+
+                         <!-- SignUp Button -->
+                         <div class="form-group col-lg-15 mx-auto mb-0">
+                            <button
+                                class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
+                                type="submit" routerLink="../signup">
+                                Create Account
+                            </button>
+                        </div>
                         <div class="text-center">
-                            <a class="small text-blue" routerLink="../password/reset" >Forgot password?</a>
+                            <a class="small text-blue" routerLink="../password/reset">Forgot password?</a>
                         </div>
                     </div>
                 </div>
