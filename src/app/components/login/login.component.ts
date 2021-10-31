@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
   isLoading = false;
+  errorStatus = '';
 
   constructor(private authSvc: AuthenticationService, private router: Router) { }
 
@@ -46,6 +47,7 @@ export class LoginComponent implements OnInit {
                     },
                     error => {
                       this.authSvc.logout();
+                      this.errorStatus = error.status;
                       this.isLoading = false;
                     }
                 );
