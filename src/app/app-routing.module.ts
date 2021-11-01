@@ -13,7 +13,8 @@ import { UnknownPathComponent } from './components/unknown-path/unknown-path.com
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
+  { path: 'home', component: HomeComponent },
   { path: 'account',
     children:[
       { path: 'login', component: LoginComponent },
