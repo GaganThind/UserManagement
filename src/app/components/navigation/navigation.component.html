@@ -1,55 +1,58 @@
-<header>
-    <!--Navbar-->
-    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark cyan" [containerInside]="false">
+<!--Navbar-->
+<nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark cyan">
 
-        <!-- Navbar brand -->
-        <mdb-navbar-brand><a class="navbar-brand" routerLink="">Gagan</a></mdb-navbar-brand>
+    <!-- Navbar brand -->
+    <a class="navbar-brand" href="/">Gagan</a>
 
-        <!-- Collapsible contents -->
-        <links>
+    <!-- Collapsible contents -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
 
-            <!-- Links -->
-            <ul class="navbar-nav ml-auto nav-flex-icons">
-                <li class="nav-item">
-                    <a class="nav-link waves-light" type="button" routerLink="" routerLinkActive="active current"
-                        mdbWavesEffect>
-                        <mdb-icon fas icon="home"></mdb-icon>Home<span class="caret"></span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link waves-light" type="button" routerLink="aboutus" routerLinkActive="active current"
-                        mdbWavesEffect>
-                        <mdb-icon fas icon="address-card"></mdb-icon>About Us<span class="caret"></span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link waves-light" type="button" routerLink="contactus"
-                        routerLinkActive="active current" mdbWavesEffect>
-                        <mdb-icon fas icon="envelope-open"></mdb-icon>Contact Us<span class="caret"></span>
-                    </a>
-                </li>
-                <li class="nav-item" *ngIf="!authSvc.isLoggedIn()">
-                    <a class="nav-link waves-light" type="button" routerLink="account/login"
-                        routerLinkActive="active current" mdbWavesEffect>
-                        <mdb-icon fas icon="sign-in-alt"></mdb-icon>Login<span class="caret"></span>
-                    </a>
-                </li>
-                <li class="nav-item dropdown" dropdown *ngIf="authSvc.isLoggedIn()">
-                    <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-                        <mdb-icon fas icon="user"></mdb-icon> Profile<span class="caret"></span>
-                    </a>
-                    <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary cyan"
-                        role="menu">
-                        <a class="dropdown-item nav-link waves-light" mdbWavesEffect routerLink="account/settings">
-                            <mdb-icon fas icon="user-circle"></mdb-icon> My Account<span class="caret"></span>
-                        </a>
-                        <a class="dropdown-item nav-link waves-light" mdbWavesEffect (click)="logout()">
-                            <mdb-icon fas icon="sign-out-alt"></mdb-icon> Log out<span class="caret"></span>
-                        </a>
-                    </div>
-                </li>
-            </ul>
-        </links>
+            <!-- Home -->
+            <li class="nav-item">
+                <a class="nav-link waves-light" type="button" routerLink="home" routerLinkActive="active current">
+                    <i class="fas fa-home"></i> Home<span class="caret"></span>
+                </a>
+            </li>
 
-    </mdb-navbar>
-</header>
+            <!-- About Us -->
+            <li class="nav-item">
+                <a class="nav-link waves-light" type="button" routerLink="aboutus" routerLinkActive="active current">
+                    <i class="fas fa-address-card"></i> About Us<span class="caret"></span>
+                </a>
+            </li>
+
+            <!-- Contact Us -->
+            <li class="nav-item">
+                <a class="nav-link waves-light" type="button" routerLink="contactus" routerLinkActive="active current">
+                    <i class="fas fa-envelope-open"></i> Contact Us<span class="caret"></span>
+                </a>
+            </li>
+
+            <!-- Login -->
+            <li class="nav-item" *ngIf="!authSvc.isLoggedIn()">
+                <a class="nav-link waves-light" type="button" routerLink="account/login"
+                    routerLinkActive="active current">
+                    <i class="fas fa-sign-in-alt"></i> Login<span class="caret"></span>
+                </a>
+            </li>
+
+            <!-- Account Profile -->
+            <li class="nav-item dropdown" *ngIf="authSvc.isLoggedIn()">
+                <a type="button" class="nav-link dropdown-toggle waves-light" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user"></i> Profile<span class="caret"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown dropdown-primary cyan" role="menu"
+                    aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item nav-link waves-light" routerLink="account/settings">
+                        <i class="fas fa-user-circle"></i> My Account<span class="caret"></span>
+                    </a>
+                    <a class="dropdown-item nav-link waves-light" (click)="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Log out<span class="caret"></span>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
