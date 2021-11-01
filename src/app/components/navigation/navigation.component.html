@@ -29,7 +29,7 @@
                     </a>
                 </li>
                 <li class="nav-item" *ngIf="!authSvc.isLoggedIn()">
-                    <a class="nav-link waves-light" type="button" routerLink="login"
+                    <a class="nav-link waves-light" type="button" routerLink="account/login"
                         routerLinkActive="active current" mdbWavesEffect>
                         <mdb-icon fas icon="sign-in-alt"></mdb-icon>Login<span class="caret"></span>
                     </a>
@@ -40,7 +40,7 @@
                     </a>
                     <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary cyan"
                         role="menu">
-                        <a class="dropdown-item nav-link waves-light" mdbWavesEffect routerLink="account">
+                        <a class="dropdown-item nav-link waves-light" mdbWavesEffect routerLink="account/settings">
                             <mdb-icon fas icon="user-circle"></mdb-icon> My Account<span class="caret"></span>
                         </a>
                         <a class="dropdown-item nav-link waves-light" mdbWavesEffect (click)="logout()">

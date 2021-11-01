@@ -14,12 +14,16 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignUpComponent },
+  { path: 'account',
+    children:[
+      { path: 'login', component: LoginComponent },
+      { path: 'signup', component: SignUpComponent },
+      { path: 'password/reset', component: ResetPasswordComponent },
+      { path: 'settings', component: AccountComponent, canActivate: [ AuthGuard ] },
+    ]
+  },
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'contactus', component: ContactUsComponent },
-  { path: 'account', component: AccountComponent, canActivate: [ AuthGuard ] },
-  { path: 'password/reset', component: ResetPasswordComponent },
   { path: '**', component: UnknownPathComponent },
 ];
 
