@@ -25,11 +25,18 @@ export class HomeComponent implements OnInit {
     taj.address = "Mumbai";
     taj.image="http://3.bp.blogspot.com/-Mny9xrIo_Yk/UpWCi1kkgoI/AAAAAAAANak/h9gH8p6BZX8/s1600/Taj+Mahal+hotel.jpg";
     hotels.push(taj);
+    hotels.push(taj);
+    hotels.push(taj);
+    hotels.push(taj);
 
     let jw = new Hotel();
     jw.name = "JW Marriot";
     jw.address = "Mumbai";
     jw.image = "https://www.luxurylifestylemag.co.uk/wp-content/uploads/2018/05/JW-Marriott-Mumbai-Exterior.jpg";
+    hotels.push(jw);
+    hotels.push(jw);
+    hotels.push(jw);
+    hotels.push(jw);
     hotels.push(jw);
 
     return hotels;

@@ -1,58 +1,63 @@
 <!--Navbar-->
-<nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark cyan">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark cyan">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <!-- Navbar brand -->
+            <a class="navbar-brand" href="/">Gagan</a>
+        </div>
 
-    <!-- Navbar brand -->
-    <a class="navbar-brand" href="/">Gagan</a>
+        <!-- Collapsible contents -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
 
-    <!-- Collapsible contents -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-
-            <!-- Home -->
-            <li class="nav-item">
-                <a class="nav-link waves-light" type="button" routerLink="home" routerLinkActive="active current">
-                    <i class="fas fa-home"></i> Home<span class="caret"></span>
-                </a>
-            </li>
-
-            <!-- About Us -->
-            <li class="nav-item">
-                <a class="nav-link waves-light" type="button" routerLink="aboutus" routerLinkActive="active current">
-                    <i class="fas fa-address-card"></i> About Us<span class="caret"></span>
-                </a>
-            </li>
-
-            <!-- Contact Us -->
-            <li class="nav-item">
-                <a class="nav-link waves-light" type="button" routerLink="contactus" routerLinkActive="active current">
-                    <i class="fas fa-envelope-open"></i> Contact Us<span class="caret"></span>
-                </a>
-            </li>
-
-            <!-- Login -->
-            <li class="nav-item" *ngIf="!authSvc.isLoggedIn()">
-                <a class="nav-link waves-light" type="button" routerLink="account/login"
-                    routerLinkActive="active current">
-                    <i class="fas fa-sign-in-alt"></i> Login<span class="caret"></span>
-                </a>
-            </li>
-
-            <!-- Account Profile -->
-            <li class="nav-item dropdown" *ngIf="authSvc.isLoggedIn()">
-                <a type="button" class="nav-link dropdown-toggle waves-light" id="navbarDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-user"></i> Profile<span class="caret"></span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right dropdown dropdown-primary cyan" role="menu"
-                    aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item nav-link waves-light" routerLink="account/settings">
-                        <i class="fas fa-user-circle"></i> My Account<span class="caret"></span>
+                <!-- Home -->
+                <li class="nav-item">
+                    <a class="nav-link waves-light" type="button" routerLink="home" routerLinkActive="active current">
+                        <i class="fas fa-home"></i> Home<span class="caret"></span>
                     </a>
-                    <a class="dropdown-item nav-link waves-light" (click)="logout()">
-                        <i class="fas fa-sign-out-alt"></i> Log out<span class="caret"></span>
+                </li>
+
+                <!-- About Us -->
+                <li class="nav-item">
+                    <a class="nav-link waves-light" type="button" routerLink="aboutus"
+                        routerLinkActive="active current">
+                        <i class="fas fa-address-card"></i> About Us<span class="caret"></span>
                     </a>
-                </div>
-            </li>
-        </ul>
+                </li>
+
+                <!-- Contact Us -->
+                <li class="nav-item">
+                    <a class="nav-link waves-light" type="button" routerLink="contactus"
+                        routerLinkActive="active current">
+                        <i class="fas fa-envelope-open"></i> Contact Us<span class="caret"></span>
+                    </a>
+                </li>
+
+                <!-- Login -->
+                <li class="nav-item" *ngIf="!authSvc.isLoggedIn()">
+                    <a class="nav-link waves-light" type="button" routerLink="account/login"
+                        routerLinkActive="active current">
+                        <i class="fas fa-sign-in-alt"></i> Login<span class="caret"></span>
+                    </a>
+                </li>
+
+                <!-- Account Profile -->
+                <li class="nav-item dropdown" *ngIf="authSvc.isLoggedIn()">
+                    <a type="button" class="nav-link dropdown-toggle waves-light" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user"></i> Profile<span class="caret"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown dropdown-primary cyan" role="menu"
+                        aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item nav-link waves-light" routerLink="account/settings">
+                            <i class="fas fa-user-circle"></i> My Account<span class="caret"></span>
+                        </a>
+                        <a class="dropdown-item nav-link waves-light" (click)="logout()">
+                            <i class="fas fa-sign-out-alt"></i> Log out<span class="caret"></span>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
