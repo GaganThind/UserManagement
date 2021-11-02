@@ -42,17 +42,18 @@
                 </li>
 
                 <!-- Account Profile -->
-                <li class="nav-item dropdown" *ngIf="authSvc.isLoggedIn()">
-                    <a type="button" class="nav-link dropdown-toggle waves-light" id="navbarDropdown" role="button"
+                <li class="nav-item dropdown" dropdown *ngIf="authSvc.isLoggedIn()">
+                    <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-user"></i> Profile<span class="caret"></span>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown dropdown-primary cyan" role="menu"
+                    <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary cyan" role="menu"
                         aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item nav-link waves-light" routerLink="account/settings">
+                        <a class="dropdown-item nav-link waves-light cyan" routerLink="account/settings"
+                            routerLinkActive="active current">
                             <i class="fas fa-user-circle"></i> My Account<span class="caret"></span>
                         </a>
-                        <a class="dropdown-item nav-link waves-light" (click)="logout()">
+                        <a class="dropdown-item nav-link waves-light cyan" (click)="logout()">
                             <i class="fas fa-sign-out-alt"></i> Log out<span class="caret"></span>
                         </a>
                     </div>
