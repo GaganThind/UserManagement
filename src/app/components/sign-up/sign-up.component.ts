@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/user';
 import { UserRegistrationService } from 'src/app/services/user-registration.service';
 
@@ -14,10 +15,11 @@ export class SignUpComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
   isLoading = false;
-  errorMessage = '';
-  message = '';
 
-  constructor(private userRegistrationSvc: UserRegistrationService) { }
+  constructor(
+    private userRegistrationSvc: UserRegistrationService, 
+    private toastrSvc: ToastrService
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -42,17 +44,15 @@ export class SignUpComponent implements OnInit {
 
     // Variable used to disable buttons
     this.isLoading = true;
-    this.message = '';
-    this.errorMessage = '';
 
     this.userRegistrationSvc.registerUser(this.user)
                             .subscribe(
                               data => {
-                                this.message = data;
+                                this.toastrSvc.success(data);
                                 this.isLoading = false;
                               },
                               error => {
-                                this.errorMessage = error;
+                                this.toastrSvc.error(error);
                                 this.isLoading = false;
                               }
                             );
