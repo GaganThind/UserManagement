@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Login } from 'src/app/models/login';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
@@ -19,7 +20,12 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   returnUrl = '';
 
-  constructor(private authSvc: AuthenticationService, private router: Router, private route: ActivatedRoute,) { }
+  constructor(
+    private authSvc: AuthenticationService, 
+    private router: Router, 
+    private route: ActivatedRoute, 
+    private toastrSvc: ToastrService
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -47,12 +53,12 @@ export class LoginComponent implements OnInit {
     this.authSvc.authenticate(this.userLogin)
                 .subscribe(
                     data => {
-                      this.authSvc.setLoggedInDetails(data);         
+                      this.authSvc.setLoggedInDetails(data);       
                       this.router.navigateByUrl(this.returnUrl);
                     },
                     error => {
                       this.authSvc.logout();
-                      this.errorMessage = error;
+                      this.toastrSvc.error(error);
                       this.isLoading = false;
                     }
                 );
