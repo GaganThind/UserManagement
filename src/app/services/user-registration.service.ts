@@ -14,4 +14,9 @@ export class UserRegistrationService {
   registerUser(user: User): Observable<string> {
     return this.http.post(`${environment.baseRestURL}/v1/users/register`, user, { responseType: 'text' });
   }
+
+  activateUser(token: string): Observable<string> {
+    return this.http.patch(`${environment.baseRestURL}/v1/users/register/verify/${token}`, token, { responseType: 'text' });
+  }
+
 }

@@ -11,6 +11,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { UnknownPathComponent } from './components/unknown-path/unknown-path.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ActivateUserComponent } from './components/activate-user/activate-user.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignUpComponent },
       { path: 'password/reset', component: ResetPasswordComponent },
+      { path: 'user/activate/:token', component: ActivateUserComponent },
       { path: 'settings', component: AccountComponent, canActivate: [ AuthGuard ] },
     ]
   },
@@ -44,5 +46,6 @@ export const routingComponents = [
   AccountComponent,
   UnknownPathComponent,
   HotelComponent,
-  ResetPasswordComponent
+  ResetPasswordComponent,
+  ActivateUserComponent
 ]
