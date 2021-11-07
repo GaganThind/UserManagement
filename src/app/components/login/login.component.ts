@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { Login } from 'src/app/models/login';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
@@ -10,13 +11,15 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   rememberMe = false;
   loginForm: FormGroup;
   submitted = false;
   isLoading = false;
   returnUrl = '';
+
+  private loginSubscription : Subscription;
 
   constructor(
     private authSvc: AuthenticationService, 
@@ -50,25 +53,30 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    let userLogin = this.loginForm.value;
+    let userLogin: Login = this.loginForm.value;
 
     // Variable used to disable buttons
     this.isLoading = true;
 
-    this.authSvc.authenticate(userLogin)
-                .subscribe(
-                    data => {
-                      this.authSvc.setLoggedInDetails(data);       
-                      this.router.navigateByUrl(this.returnUrl);
-                    },
-                    error => {
-                      this.authSvc.logout();
-                      this.toastrSvc.error(error);
-                      this.isLoading = false;
-                      this.submitted = false;
-                      this.loginForm.get('password').reset();
-                    }
-                );
+    this.loginSubscription = 
+        this.authSvc.authenticate(userLogin)
+                      .subscribe(
+                          data => {
+                            this.authSvc.setLoggedInDetails(data);       
+                            this.router.navigateByUrl(this.returnUrl);
+                          },
+                          error => {
+                            this.authSvc.logout();
+                            this.toastrSvc.error(error);
+                            this.isLoading = false;
+                            this.submitted = false;
+                            this.loginForm.get('password').reset();
+                          }
+                      ); 
+  }
+
+  ngOnDestroy(): void {
+    this.loginSubscription.unsubscribe();
   }
 
 }

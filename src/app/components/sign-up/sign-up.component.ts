@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { UserRegistrationService } from 'src/app/services/user-registration.service';
 
@@ -9,11 +10,13 @@ import { UserRegistrationService } from 'src/app/services/user-registration.serv
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent implements OnInit, OnDestroy {
 
   signUpForm: FormGroup;
   submitted = false;
   isLoading = false;
+
+  private signUpSubscription: Subscription;
 
   constructor(
     private userRegistrationSvc: UserRegistrationService, 
@@ -48,26 +51,31 @@ export class SignUpComponent implements OnInit {
       return;
     }
 
-    let user = this.signUpForm.value;
+    let user: User = this.signUpForm.value;
 
     // Variable used to disable buttons
     this.isLoading = true;
 
-    this.userRegistrationSvc.registerUser(user)
-                            .subscribe(
-                              data => {
-                                this.toastrSvc.success(data);
-                                this.isLoading = false;
-                                this.submitted = false;
-                                this.signUpForm.reset();
-                              },
-                              error => {
-                                this.toastrSvc.error(error);
-                                this.isLoading = false;
-                                this.submitted = false;
-                              }
-                            );
+    this.signUpSubscription = 
+        this.userRegistrationSvc.registerUser(user)
+                                .subscribe(
+                                  data => {
+                                    this.toastrSvc.success(data);
+                                    this.isLoading = false;
+                                    this.submitted = false;
+                                    this.signUpForm.reset();
+                                  },
+                                  error => {
+                                    this.toastrSvc.error(error);
+                                    this.isLoading = false;
+                                    this.submitted = false;
+                                  }
+                                );
 
+  }
+
+  ngOnDestroy(): void {
+    this.signUpSubscription.unsubscribe();
   }
 
 }
