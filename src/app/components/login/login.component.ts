@@ -12,12 +12,10 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class LoginComponent implements OnInit {
 
-  userLogin = new Login();
   rememberMe = false;
   loginForm: FormGroup;
   submitted = false;
   isLoading = false;
-  errorMessage = '';
   returnUrl = '';
 
   constructor(
@@ -37,20 +35,27 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
+  /**
+   * Method returning form control used for validation of inputs
+   */
+  get frm() {
+    return this.loginForm.controls;
+  }
+
   login() {
     this.submitted = true;
 
     // If username or password is incorrect, then stop execution
-    if (undefined === this.userLogin.username || undefined === this.userLogin.password) {
+    if (this.loginForm.invalid) {
       return;
     }
 
+    let userLogin = this.loginForm.value;
+
     // Variable used to disable buttons
     this.isLoading = true;
-    this.errorMessage = '';
 
-    // Authentication
-    this.authSvc.authenticate(this.userLogin)
+    this.authSvc.authenticate(userLogin)
                 .subscribe(
                     data => {
                       this.authSvc.setLoggedInDetails(data);       
@@ -60,6 +65,8 @@ export class LoginComponent implements OnInit {
                       this.authSvc.logout();
                       this.toastrSvc.error(error);
                       this.isLoading = false;
+                      this.submitted = false;
+                      this.loginForm.get('password').reset();
                     }
                 );
   }

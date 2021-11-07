@@ -5,61 +5,64 @@
                 <div class="row">
                     <div class="mx-auto">
                         <h3 class="login-heading mb-4">Welcome!</h3>
+                        <form [formGroup]="loginForm" (ngSubmit)="login()">
 
-                        <!-- Email Address -->
-                        <div class="input-group col-lg-15 mb-4">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text bg-white px-3 border-md border-right-0">
-                                    <i class="fa fa-envelope text-muted"></i>
-                                </span>
+                            <!-- Email Address -->
+                            <div class="input-group col-lg-15 mb-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-white px-3 border-md border-right-0">
+                                        <i class="fa fa-envelope text-muted"></i>
+                                    </span>
+                                </div>
+                                <input id="email" type="email" name="email" placeholder="Email Address"
+                                    class="form-control bg-white border-left-0 border-md"
+                                    formControlName="email" required>
                             </div>
-                            <input id="email" type="email" name="email" placeholder="Email Address"
-                                class="form-control bg-white border-left-0 border-md"
-                                [(ngModel)]="userLogin.username" #email=ngModel required>
-                        </div>
-                        <div *ngIf="email.invalid && (email.dirty || email.touched || submitted)" class="alert alert-danger">
-                            <div *ngIf="email.errors.required">
-                                Email is required
+                            <div *ngIf="frm.email.invalid && (frm.email.dirty || frm.email.touched || submitted)"
+                                class="alert alert-danger">
+                                <div *ngIf="frm.email.errors?.required">
+                                    Email is required
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Password -->
-                        <div class="input-group col-lg-15 mb-4">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text bg-white px-3 border-md border-right-0">
-                                    <i class="fa fa-lock text-muted"></i>
-                                </span>
+                            <!-- Password -->
+                            <div class="input-group col-lg-15 mb-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-white px-3 border-md border-right-0">
+                                        <i class="fa fa-lock text-muted"></i>
+                                    </span>
+                                </div>
+                                <input id="password" type="password" name="password" placeholder="Password"
+                                    class="form-control bg-white border-left-0 border-md"
+                                    formControlName="password" required>
                             </div>
-                            <input id="password" type="password" name="password" placeholder="Password"
-                                class="form-control bg-white border-left-0 border-md"
-                                [(ngModel)]="userLogin.password" #password=ngModel required>
-                        </div>
-                        <div *ngIf="password.invalid && (password.dirty || password.touched || submitted)" class="alert alert-danger">
-                            <div *ngIf="password.errors.required">
-                                Password is required
+                            <div *ngIf="frm.password.invalid && (frm.password.dirty || frm.password.touched || submitted)"
+                                class="alert alert-danger">
+                                <div *ngIf="frm.password.errors?.required">
+                                    Password is required
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Remenber Me -->
-                        <div class="custom-control custom-checkbox mb-3">
-                            <input type="checkbox" class="custom-control-input" id="customCheck1"
-                                [(ngModel)]="rememberMe">
-                            <label class="custom-control-label" for="customCheck1">Remember password</label>
-                        </div>
+                            <!-- Remenber Me -->
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1"
+                                    [(ngModel)]="rememberMe">
+                                <label class="custom-control-label" for="customCheck1">Remember password</label>
+                            </div>
 
-                        <!-- Submit Button -->
+                            <!-- Submit Button -->
+                            <div class="form-group col-lg-15 mx-auto mb-0">
+                                <button
+                                    class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
+                                    [disabled]="isLoading" type="submit">
+                                    <span *ngIf="isLoading"><i class="fas fa-spinner"></i></span>
+                                    Sign in
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- SignUp Button -->
                         <div class="form-group col-lg-15 mx-auto mb-0">
-                            <button
-                                class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
-                                [disabled] = "isLoading"
-                                type="submit" (click)="login()">
-                                <span *ngIf="isLoading"><i class="fas fa-spinner"></i></span>
-                                Sign in
-                            </button>
-                        </div>
-
-                         <!-- SignUp Button -->
-                         <div class="form-group col-lg-15 mx-auto mb-0">
                             <button
                                 class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
                                 type="submit" routerLink="../signup">
