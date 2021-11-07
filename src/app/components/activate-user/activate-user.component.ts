@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { NotificationService } from 'src/app/services/notification.service';
 import { UserRegistrationService } from 'src/app/services/user-registration.service';
 
 @Component({
@@ -11,17 +12,17 @@ import { UserRegistrationService } from 'src/app/services/user-registration.serv
 })
 export class ActivateUserComponent implements OnInit, OnDestroy {
 
+  private destroy$: Subject<void> = new Subject<void>();
+
   message = '';
   EmailStatus = EmailStatus;
   emailStatus = EmailStatus.Verifying;
-
-  private activateUserSubscription: Subscription;
 
   constructor(
     private userRegistrationSvc: UserRegistrationService, 
     private router: Router,
     private route: ActivatedRoute,
-    private toastrSvc: ToastrService
+    private notificationSvc: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -29,7 +30,7 @@ export class ActivateUserComponent implements OnInit, OnDestroy {
 
     // May not be needed, as router will not call this component if token is not present
     if (undefined == token) {
-      this.toastrSvc.error("No token provided");
+      this.notificationSvc.error("No token provided");
       this.emailStatus = EmailStatus.Failed;
       return;
     }
@@ -37,23 +38,24 @@ export class ActivateUserComponent implements OnInit, OnDestroy {
     // remove token from url to prevent http referer leakage
     this.router.navigate([], { relativeTo: this.route, replaceUrl: true });
 
-    this.activateUserSubscription = 
-        this.userRegistrationSvc.activateUser(token)
-              .subscribe(
-                data => {
-                  this.toastrSvc.success(data);
-                  this.router.navigate(['../../../login'], { relativeTo: this.route });
-                },
-                error => {
-                  this.toastrSvc.error(error);
-                  this.emailStatus = EmailStatus.Failed;
-                }
-        );
+    this.userRegistrationSvc.activateUser(token)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(
+            data => {
+              this.notificationSvc.success(data);
+              this.router.navigate(['../../../login'], { relativeTo: this.route });
+            },
+            error => {
+              this.notificationSvc.error(error);
+              this.emailStatus = EmailStatus.Failed;
+            }
+    );
 
   }
 
   ngOnDestroy(): void {
-    this.activateUserSubscription.unsubscribe();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { Component, TemplateRef } from '@angular/core';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-notification',
@@ -8,6 +8,10 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class NotificationComponent {
 
-  constructor(public toastrSvc: ToastrService) { }
+  constructor(public notificationSvc: NotificationService) { }
+
+  isTemplate(toast) { 
+    return toast.textOrTpl instanceof TemplateRef; 
+  }
   
 }

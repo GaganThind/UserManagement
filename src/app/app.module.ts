@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthenticationService } from './services/authentication.service';
@@ -14,6 +12,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { UserRegistrationService } from './services/user-registration.service';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { NotificationComponent } from './components/notification/notification.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -24,15 +23,11 @@ import { NotificationComponent } from './components/notification/notification.co
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MDBBootstrapModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot({
-      timeOut: 3000,
-      tapToDismiss: true
-    })
+    NgbModule
   ],
   providers: [
     AuthenticationService,

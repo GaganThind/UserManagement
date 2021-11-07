@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { User } from 'src/app/models/user';
+import { NotificationService } from 'src/app/services/notification.service';
 import { UserRegistrationService } from 'src/app/services/user-registration.service';
 
 @Component({
@@ -12,15 +13,15 @@ import { UserRegistrationService } from 'src/app/services/user-registration.serv
 })
 export class SignUpComponent implements OnInit, OnDestroy {
 
+  private destroy$: Subject<void> = new Subject<void>();
+
   signUpForm: FormGroup;
   submitted = false;
   isLoading = false;
 
-  private signUpSubscription: Subscription;
-
   constructor(
     private userRegistrationSvc: UserRegistrationService, 
-    private toastrSvc: ToastrService
+    private notificationSvc: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -55,27 +56,28 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
     // Variable used to disable buttons
     this.isLoading = true;
-
-    this.signUpSubscription = 
-        this.userRegistrationSvc.registerUser(user)
-                                .subscribe(
-                                  data => {
-                                    this.toastrSvc.success(data);
-                                    this.isLoading = false;
-                                    this.submitted = false;
-                                    this.signUpForm.reset();
-                                  },
-                                  error => {
-                                    this.toastrSvc.error(error);
-                                    this.isLoading = false;
-                                    this.submitted = false;
-                                  }
-                                );
+ 
+    this.userRegistrationSvc.registerUser(user)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(
+            data => {
+              this.notificationSvc.success(data);
+              this.isLoading = false;
+              this.submitted = false;
+              this.signUpForm.reset();
+            },
+            error => {
+              this.notificationSvc.error(error);
+              this.isLoading = false;
+              this.submitted = false;
+            }
+          );
 
   }
 
   ngOnDestroy(): void {
-    this.signUpSubscription.unsubscribe();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }
