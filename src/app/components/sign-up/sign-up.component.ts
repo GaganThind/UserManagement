@@ -11,7 +11,6 @@ import { UserRegistrationService } from 'src/app/services/user-registration.serv
 })
 export class SignUpComponent implements OnInit {
 
-  user = new User();
   signUpForm: FormGroup;
   submitted = false;
   isLoading = false;
@@ -49,12 +48,12 @@ export class SignUpComponent implements OnInit {
       return;
     }
 
-    this.user = this.signUpForm.value;
+    let user = this.signUpForm.value;
 
     // Variable used to disable buttons
     this.isLoading = true;
 
-    this.userRegistrationSvc.registerUser(this.user)
+    this.userRegistrationSvc.registerUser(user)
                             .subscribe(
                               data => {
                                 this.toastrSvc.success(data);
@@ -66,15 +65,9 @@ export class SignUpComponent implements OnInit {
                                 this.toastrSvc.error(error);
                                 this.isLoading = false;
                                 this.submitted = false;
-                                this.signUpForm.reset();
                               }
                             );
 
   }
 
-  private areRequiredFieldsNotSet() {
-    return undefined === this.user.firstName || undefined === this.user.lastName
-      || undefined === this.user.email || undefined === this.user.password
-      || undefined === this.user.matchingPassword;
-  }
 }

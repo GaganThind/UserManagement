@@ -61,7 +61,7 @@
             Should match the password
         </small>
         <div *ngIf="frm.matchingPassword.dirty || frm.matchingPassword.touched || submitted">
-            <div *ngIf="frm.matchingPassword.invalid && matchingPassword.errors?.required" class="alert alert-danger">
+            <div *ngIf="frm.matchingPassword.invalid && frm.matchingPassword.errors?.required" class="alert alert-danger">
                 Confirm Password is required
             </div>
             <div *ngIf="frm.password.value != frm.matchingPassword.value" class="alert alert-danger">
