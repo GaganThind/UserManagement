@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/user';
 import { UserRegistrationService } from 'src/app/services/user-registration.service';
@@ -19,8 +18,7 @@ export class SignUpComponent implements OnInit {
 
   constructor(
     private userRegistrationSvc: UserRegistrationService, 
-    private toastrSvc: ToastrService,
-    private route: Router
+    private toastrSvc: ToastrService
   ) { }
 
   ngOnInit(): void {
