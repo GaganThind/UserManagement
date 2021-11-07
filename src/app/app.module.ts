@@ -13,6 +13,7 @@ import { UserRegistrationService } from './services/user-registration.service';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { NotificationComponent } from './components/notification/notification.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NotificationService } from './services/notification.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     AuthGuard,
-    UserRegistrationService
+    UserRegistrationService,
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })
