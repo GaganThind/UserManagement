@@ -9,7 +9,10 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class NavigationComponent implements OnInit {
 
-  constructor(public authSvc: AuthenticationService, private router: Router) { }
+  constructor(
+    public authSvc: AuthenticationService, 
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
