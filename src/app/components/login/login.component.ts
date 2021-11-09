@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           .pipe(takeUntil(this.destroy$))
           .subscribe(
               data => {
-                this.authSvc.setLoggedInDetails(data);       
+                this.authSvc.setLoggedInDetails(data);
                 this.router.navigateByUrl(this.returnUrl);
               },
               error => {
