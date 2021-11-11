@@ -17,6 +17,10 @@ export class NavigationComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get username() {
+    return this.authSvc.getUsername();
+  }
+
   logout() {
     this.authSvc.logout();
     this.router.navigateByUrl('/');

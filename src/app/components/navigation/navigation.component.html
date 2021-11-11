@@ -42,18 +42,16 @@
                 </li>
 
                 <!-- Account Profile -->
-                <li class="nav-item dropdown" dropdown *ngIf="authSvc.isLoggedIn()">
-                    <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user"></i> Profile<span class="caret"></span>
+                <li class="nav-item" ngbDropdown *ngIf="authSvc.isLoggedIn()">
+                    <a ngbDropdownToggle type="button" class="nav-link waves-light" id="navbarDropdown" role="button">
+                        <i class="fas fa-user"></i> {{username}}<span class="caret"></span>
                     </a>
-                    <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary cyan" role="menu"
-                        aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item nav-link waves-light cyan" routerLink="account/settings"
+                    <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right bg-blue" role="menu" aria-labelledby="navbarDropdown">
+                        <a ngbDropdownItem id="myAccount" class="dropdown-item nav-link waves-light" routerLink="account/settings"
                             routerLinkActive="active current">
                             <i class="fas fa-user-circle"></i> My Account<span class="caret"></span>
                         </a>
-                        <a class="dropdown-item nav-link waves-light cyan" (click)="logout()">
+                        <a ngbDropdownItem id="logOut" class="dropdown-item nav-link waves-light" (click)="logout()">
                             <i class="fas fa-sign-out-alt"></i> Log out<span class="caret"></span>
                         </a>
                     </div>
