@@ -38,8 +38,9 @@ export class NotificationService {
    * Method used to show simple message to user
    * 
    * @param message - message text
+   * @param delay - notification toast timeout
    */
-  showStandard(message: string) {
+  showStandard(message: string, delay: number = NotificationService.NOTIFY_DELAY) {
     this.show(message);
   }
 
@@ -47,36 +48,40 @@ export class NotificationService {
    * Method used to show success message to user
    * 
    * @param message - message text
+   * @param delay - notification toast timeout
    */
-  success(message: string) {
-    this.show(message, { classname: 'bg-success text-light', delay: NotificationService.NOTIFY_DELAY });
+  success(message: string, delay: number = NotificationService.NOTIFY_DELAY) {
+    this.show(message, { classname: 'bg-success text-light', delay:  delay });
   }
 
   /**
    * Method used to show error message to user
    * 
    * @param message - message text
+   * @param delay - notification toast timeout
    */
-  error(message: string) {
-    this.show(message, { classname: 'bg-danger text-light', delay: NotificationService.NOTIFY_DELAY });
+  error(message: string, delay: number = NotificationService.NOTIFY_DELAY) {
+    this.show(message, { classname: 'bg-danger text-light', delay: delay });
   }
 
   /**
    * Method used to show warning message to user
    * 
    * @param message - message text
+   * @param delay - notification toast timeout
    */
-  warning(message: string) {
-    this.show(message, { classname: 'bg-warning text-light', delay: NotificationService.NOTIFY_DELAY });
+  warning(message: string, delay: number = NotificationService.NOTIFY_DELAY) {
+    this.show(message, { classname: 'bg-warning text-light', delay: delay });
   }
 
   /**
    * Method used to show info message to user
    * 
    * @param message - message text
+   * @param delay - notification toast timeout
    */
-  info(message: string) {
-    this.show(message, { classname: 'bg-info text-light', delay: NotificationService.NOTIFY_DELAY });
+  info(message: string, delay: number = NotificationService.NOTIFY_DELAY) {
+    this.show(message, { classname: 'bg-info text-light', delay: delay });
   }
 
 }

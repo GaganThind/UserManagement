@@ -61,7 +61,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
           .pipe(takeUntil(this.destroy$))
           .subscribe(
             data => {
-              this.notificationSvc.success(data);
+              this.notificationSvc.success(data, 5000);
               this.isLoading = false;
               this.submitted = false;
               this.signUpForm.reset();

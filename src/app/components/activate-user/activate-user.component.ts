@@ -42,7 +42,7 @@ export class ActivateUserComponent implements OnInit, OnDestroy {
           .pipe(takeUntil(this.destroy$))
           .subscribe(
             data => {
-              this.notificationSvc.success(data);
+              this.notificationSvc.success(data, 5000);
               this.router.navigate(['../../../login'], { relativeTo: this.route });
             },
             error => {
