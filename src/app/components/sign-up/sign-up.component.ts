@@ -70,6 +70,8 @@ export class SignUpComponent implements OnInit, OnDestroy {
               this.notificationSvc.error(error);
               this.isLoading = false;
               this.submitted = false;
+              this.signUpForm.get('password').reset();
+              this.signUpForm.get('matchingPassword').reset();
             }
           );
 
