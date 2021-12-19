@@ -4,15 +4,24 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppRoutingModule, routingComponents } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { AuthenticationService } from './services/authentication.service';
-import { AuthInterceptor } from './interceptors/auth-interceptor';
-import { AuthGuard } from './guard/auth.guard';
-import { UserRegistrationService } from './services/user-registration.service';
-import { ErrorInterceptor } from './interceptors/error.interceptor';
-import { NotificationComponent } from './components/notification/notification.component';
+// User Modules
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AppRoutingModule, routingComponents } from './app-routing.module';
+
+// Components
+import { AppComponent } from './app.component';
+import { NotificationComponent } from './components/notification/notification.component';
+
+// Guards
+import { AuthGuard } from './guard/auth.guard';
+
+// Interceptors
+import { AuthInterceptor } from './interceptors/auth-interceptor';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
+
+// Services
+import { AuthenticationService } from './services/authentication.service';
+import { UserRegistrationService } from './services/user-registration.service';
 import { NotificationService } from './services/notification.service';
 import { UserDetailsService } from './services/user-details.service';
 
