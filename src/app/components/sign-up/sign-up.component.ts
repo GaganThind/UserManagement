@@ -18,6 +18,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   signUpForm: FormGroup;
   submitted = false;
   isLoading = false;
+  cities = this.getCities();
 
   constructor(
     private userRegistrationSvc: UserRegistrationService, 
@@ -33,7 +34,9 @@ export class SignUpComponent implements OnInit, OnDestroy {
       matchingPassword: new FormControl('', Validators.required),
       phoneNumber: new FormControl(''),
       dob: new FormControl(''),
-      gender: new FormControl(null)
+      gender: new FormControl(null),
+      addressLine1: new FormControl(''),
+      addressLine2: new FormControl('')
     });
   }
 
@@ -49,6 +52,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
     // If required fields are not present, then return. The UI will automatically display errors.
     if (this.signUpForm.invalid) {
+      this.notificationSvc.error("Fields marked by red border are required.");
       return;
     }
 
@@ -75,6 +79,20 @@ export class SignUpComponent implements OnInit, OnDestroy {
             }
           );
 
+  }
+
+  getCities() {
+    return [
+      { id: "US", name: "United State" },
+      { id: "IN", name: "India" }
+    ]
+  }
+
+  getState() {
+    return [
+      { id: "US", name: "United State" },
+      { id: "IN", name: "India" }
+    ]
   }
 
   ngOnDestroy(): void {

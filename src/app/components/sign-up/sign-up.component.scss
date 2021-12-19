@@ -4,8 +4,40 @@
 }
 
 .btn-signUp {
-    font-size: 0.9rem;
-    letter-spacing: 0.05rem;
-    padding: 0.75rem 1rem;
-    border-radius: 2rem;
-  }
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+  border-radius: 2rem;
+}
+
+.ng-invalid:not(form).ng-touched {
+  border: 1px solid red;
+}
+
+.fieldset {
+  width: inherit;
+  border: 1px groove #ced4da;
+  border-radius: 0.35em;
+  display: block;
+  margin-right: 2px;
+  padding-bottom: 0.625em;
+  padding-left: 0.55em;
+  padding-right: 0.55em;
+}
+
+.address-fs {
+  width: inherit;
+  border: 1px groove #ced4da;
+  border-radius: 0.35em;
+  display: block;
+  margin-right: 2px;
+  padding-bottom: 0.625em;
+  padding-left: 0.55em;
+  padding-right: 0.55em;
+}
+
+legend {
+  font-size: smaller;
+  text-align: left;
+  width: fit-content;
+}
