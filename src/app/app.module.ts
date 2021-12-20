@@ -16,7 +16,7 @@ import { NotificationComponent } from './components/notification/notification.co
 import { AuthGuard } from './guard/auth.guard';
 
 // Interceptors
-import { AuthInterceptor } from './interceptors/auth-interceptor';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 // Services
