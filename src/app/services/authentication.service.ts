@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Login } from '../models/login';
-import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { UserDetailsService } from './user-details.service';
 
@@ -16,7 +15,7 @@ export class AuthenticationService {
   ) { }
 
   authenticate(userLogin: Login): Observable<string> {
-    return this.http.post<string>(`${environment.baseRestURL}/login`, userLogin);
+    return this.http.post<string>(`/login`, userLogin);
   }
 
   isLoggedIn(): boolean {

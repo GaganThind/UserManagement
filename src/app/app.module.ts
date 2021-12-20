@@ -18,6 +18,7 @@ import { AuthGuard } from './guard/auth.guard';
 // Interceptors
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { HttpRequestInterceptor } from './interceptors/http-request.interceptor';
 
 // Services
 import { AuthenticationService } from './services/authentication.service';
@@ -42,6 +43,7 @@ import { UserDetailsService } from './services/user-details.service';
   ],
   providers: [
     AuthenticationService,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     AuthGuard,
