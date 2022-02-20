@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { User } from 'src/app/models/user';
+import { AddressService } from 'src/app/services/address.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { UserRegistrationService } from 'src/app/services/user-registration.service';
 
@@ -18,11 +19,14 @@ export class SignUpComponent implements OnInit, OnDestroy {
   signUpForm: FormGroup;
   submitted = false;
   isLoading = false;
-  cities = this.getCities();
+  cities: any;
+  states: any;
+  countries: any;
 
   constructor(
     private userRegistrationSvc: UserRegistrationService, 
-    private notificationSvc: NotificationService
+    private notificationSvc: NotificationService,
+    private addressSvc: AddressService
   ) { }
 
   ngOnInit(): void {
@@ -36,8 +40,14 @@ export class SignUpComponent implements OnInit, OnDestroy {
       dob: new FormControl(''),
       gender: new FormControl(null),
       addressLine1: new FormControl(''),
-      addressLine2: new FormControl('')
+      addressLine2: new FormControl(''),
+      city: new FormControl(''),
+      state: new FormControl(''),
+      country: new FormControl(''),
+      zipcode: new FormControl('')
     });
+
+    this.getCountries();
   }
 
   /**
@@ -81,18 +91,71 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   }
 
-  getCities() {
-    return [
-      { id: "US", name: "United State" },
-      { id: "IN", name: "India" }
-    ]
+  getCities(stateId: string) {
+    let state = stateId.includes(':') ? stateId.split(':')[1].trim() : stateId.trim();
+    this.addressSvc.getCities(this.signUpForm.get('country').value, state)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(
+            data => {
+              this.cities = data;
+            },
+            error => {
+              this.notificationSvc.error(error);
+            }
+    );
   }
 
-  getState() {
-    return [
-      { id: "US", name: "United State" },
-      { id: "IN", name: "India" }
-    ]
+  getStates(countryId: string) {
+    let country = countryId.includes(':') ? countryId.split(':')[1].trim() : countryId.trim();
+    this.addressSvc.getStates(country)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(
+            data => {
+              this.states = data;
+            },
+            error => {
+              this.notificationSvc.error(error);
+            }
+    );
+  }
+
+  getCountries() {
+    this.addressSvc.getCountries()
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(
+            data => {
+              this.countries = data;
+            },
+            error => {
+              this.notificationSvc.error(error);
+            }
+          );
+  }
+
+  checkZipcode(event: any) {
+    const country = this.signUpForm.get('country').value;
+    if ("" === country) {
+      this.notificationSvc.error("Country not selected", 5000);
+      return false;
+    }
+
+    const zipcode = event.target.value;
+    if ("" === zipcode.trim()) {
+      return false;
+    }
+
+    this.addressSvc.getDataBasedOnZipcode(country, zipcode)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(
+            data => {
+              this.signUpForm.get('state').setValue(data['state']);
+              this.getCities(data['state']);
+              this.signUpForm.get('city').setValue(data['city']);
+            },
+            error => {
+              this.notificationSvc.error(error);
+            }
+          );
   }
 
   ngOnDestroy(): void {

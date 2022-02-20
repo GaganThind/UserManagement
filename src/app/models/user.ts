@@ -10,6 +10,12 @@ export class User {
     public dob: Date;
     public gender: string;
     public userRole: Set<UserRole>;
+    public addressLine1: string;
+    public addressLine2: string;
+    public city: string;
+    public state: string;
+    public country: string;
+    public zipcode: number;
 
     addRole(role: string) {
         if (undefined == this.userRole) {

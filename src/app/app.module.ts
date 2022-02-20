@@ -25,6 +25,7 @@ import { AuthenticationService } from './services/authentication.service';
 import { UserRegistrationService } from './services/user-registration.service';
 import { NotificationService } from './services/notification.service';
 import { UserDetailsService } from './services/user-details.service';
+import { AddressService } from './services/address.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { UserDetailsService } from './services/user-details.service';
     AuthGuard,
     UserRegistrationService,
     NotificationService,
-    UserDetailsService
+    UserDetailsService,
+    AddressService
   ],
   bootstrap: [AppComponent]
 })

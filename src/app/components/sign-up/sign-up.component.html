@@ -120,14 +120,26 @@
                     <input type="text" id="addressLine2" name="addressLine2" title="Address Line 2" class="form-control" placeholder="Address Line 2"
                     formControlName="addressLine2">
                     <br>
-                    <select name="city" id="city">
-                        <option value="" [ngValue]>Select City</option>
+                    <select name="city" id="city" title="City" class="form-control" formControlName="city">
+                        <option [ngValue]="null" selected disabled>Select City</option>
                         <option *ngFor="let city of cities" [ngValue]="city.id">{{ city.name }}</option>
                     </select>
                     <br>
-                    
+                    <select name="state" id="state" title="State" class="form-control" formControlName="state"
+                    #state (change)="getCities(state.value)">
+                        <option [ngValue]="null" selected disabled>Select State</option>
+                        <option *ngFor="let state of states" [ngValue]="state.id">{{ state.name }}</option>
+                    </select>
                     <br>
-
+                    <select name="country" id="country" title="Country" class="form-control" formControlName="country"
+                    #country (change)="getStates(country.value)">
+                        <option [ngValue]="null" selected disabled>Select Country</option>
+                        <option *ngFor="let country of countries" [ngValue]="country.id">{{ country.name }}</option>
+                    </select>
+                    <br>
+                    <input type="text" id="zipcode" name="zipcode" title="Zipcode" class="form-control" placeholder="Zipcode"
+                    formControlName="zipcode" (focusout)="checkZipcode($event)">
+                    <br>
                 </fieldset>
             </div>
 
